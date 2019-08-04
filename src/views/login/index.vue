@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import store from '@/store'
 export default {
   data () {
     // 自定义校验
@@ -57,6 +58,7 @@ export default {
         if (valid) {
           this.$http.post('http://ttapi.research.itcast.cn/mp/v1_0/authorizations', this.login).then(({ data }) => {
             // console.log(data)
+            store.setUser(data.data)
             this.$router.push('/')
           }).catch(() => {
             this.$message.error('手机号或验证码错误')
