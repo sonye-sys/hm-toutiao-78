@@ -53,13 +53,13 @@
           <!-- 下拉菜单 -->
           <el-dropdown class="my-dropdown">
             <span class="el-dropdown-link">
-              <img src="../../../public/images/avatar.jpg" alt />
-              下拉菜单
+              <img :src="photo" />
+              {{name}}
               <i class="el-icon-arrow-down el-icon--right"></i>
             </span>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item icon="el-icon-setting">个人设置</el-dropdown-item>
-              <el-dropdown-item icon="el-icon-unlock">退出登录</el-dropdown-item>
+              <el-dropdown-item icon="el-icon-setting" @click.native="setting">个人设置</el-dropdown-item>
+              <el-dropdown-item icon="el-icon-unlock" @click.native="goLogin">退出登录</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </el-header>
@@ -71,16 +71,31 @@
   </div>
 </template>
 <script>
+import store from '@/store'
 export default {
   data () {
     return {
-      isCollapse: false
+      isCollapse: false,
+      name: '',
+      photo: ''
     }
+  },
+  created () {
+    const user = store.getUser()
+    this.name = user.name
+    this.photo = user.photo
   },
   methods: {
     //   切换侧边栏的收起与展开
     toggleMenu () {
       this.isCollapse = !this.isCollapse
+    },
+    setting () {
+      this.$router.push('/setting')
+    },
+    goLogin () {
+      store.clearUser()
+      this.$router.push({ name: 'login' })
     }
   }
 }
