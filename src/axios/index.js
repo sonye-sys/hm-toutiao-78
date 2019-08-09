@@ -6,6 +6,7 @@ import JSONBIG from 'json-bigint'
 // axios.defaults.headers = {
 //   Authorization: `Bearer ${store.getUser().token}`
 // }
+axios.defaults.baseURL = 'http://ttapi.research.itcast.cn/mp/v1_0/'
 // 配置响应回来的数据进行处理 最大安全值
 axios.defaults.transformResponse = [(data) => {
   // data是原始json字符  对 data 进行转化 return的值是转化后的结果

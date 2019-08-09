@@ -16,14 +16,7 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item label="频道：">
-          <el-select v-model="reqParams.channel_id" placeholder="请选择" clearable>
-            <el-option
-              v-for="item in channelOptions"
-              :key="item.id"
-              :label="item.name"
-              :value="item.id"
-            ></el-option>
-          </el-select>
+          <my-channel v-model="reqParams.channel_id"></my-channel>
         </el-form-item>
         <el-form-item label="日期：">
           <el-date-picker
@@ -89,18 +82,7 @@
 </template>
 <script>
 export default {
-  // 侦听事件，如果清空的话就改变一下状态
-  watch: {
-    'reqParams.channel_id': function (newVal, oldVal) {
-      if (newVal === '') {
-        // axios将不会把参数给后端
-        this.reqParams.channel_id = null
-      }
-    }
-  },
   created () {
-    // 获取频道下拉选项数据
-    this.getChannelOptions()
     // 获取文章列表
     this.getArticles()
   },
@@ -142,15 +124,6 @@ export default {
       this.reqParams.page = newPage
       this.getArticles()
     },
-    async getChannelOptions () {
-      const {
-        data: { data }
-      } = await this.$http.get(
-        'http://ttapi.research.itcast.cn/mp/v1_0/channels'
-      )
-      this.channelOptions = data.channels
-      // console.log(data.channels)
-    },
     async getArticles () {
       const {
         data: { data }
@@ -175,8 +148,6 @@ export default {
         // 每页的文章数量
         per_page: 10
       },
-      // 频道下拉数据
-      channelOptions: [],
       // 日期数据
       dateArr: [],
       // 文章列表数据
