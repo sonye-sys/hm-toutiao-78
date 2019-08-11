@@ -56,13 +56,6 @@ export default {
     loginUse () {
       this.$refs.loginForm.validate(async valid => {
         if (valid) {
-          // this.$http.post('http://ttapi.research.itcast.cn/mp/v1_0/authorizations', this.login).then(({ data }) => {
-          //   // console.log(data.data)
-          //   store.setUser(data.data)
-          //   this.$router.push('/')
-          // }).catch(() => {
-          //   this.$message.error('手机号或验证码错误')
-          // })
           try {
             const { data: { data } } = await this.$http.post('http://ttapi.research.itcast.cn/mp/v1_0/authorizations', this.login)
             store.setUser(data)
