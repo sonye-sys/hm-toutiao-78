@@ -6,7 +6,9 @@ export default {
   // 设置用户信息
   setUser (user) {
     //   存储 user 对象数据
-    window.sessionStorage.setItem(KEY, JSON.stringify(user))
+    const oldUser = this.getUser()
+    const newUser = { ...oldUser, ...user }
+    window.sessionStorage.setItem(KEY, JSON.stringify(newUser))
   },
   //   获取用户信息
   getUser () {
