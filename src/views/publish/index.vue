@@ -50,7 +50,7 @@ import 'quill/dist/quill.bubble.css'
 import { quillEditor } from 'vue-quill-editor'
 export default {
   // 挂载富文本组件
-  components: {
+  conponents: {
     quillEditor
   },
   data () {

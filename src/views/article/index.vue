@@ -102,7 +102,12 @@ export default {
         await this.$http.delete(`http://ttapi.research.itcast.cn/mp/v1_0/articles/${id}`)
         this.$message.success('删除文章成功')
         this.getArticles()
-      }).catch(() => {})
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
+      })
     },
     // 时间改变事件
     changeDate (dateArr) {

@@ -36,7 +36,7 @@ export default {
     return {
       login: {
         mobile: '17635072901',
-        code: '246810'
+        code: null
       },
       // 校验规则对象
       loginRules: {
@@ -45,7 +45,7 @@ export default {
           { validator: checkModile, trigger: 'blur' }
         ],
         code: [
-          { required: true, message: '请输入验证码', trigger: 'blur' },
+          { required: true, message: '验证码不能为空', trigger: 'blur' },
           { len: 6, message: '请输入6位验证码', trigger: 'blur' }
         ]
       }
